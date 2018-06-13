@@ -1,5 +1,30 @@
-import React from 'react';
+import React,{Component} from 'react';
+import {connect} from 'react-redux';
+import {fetchPosts} from '../actions/index';
+import { Link } from 'react-router';
 
-export default () => {
-    return <div> list of blog posts. </div> ;
+class PostsIndex extends Component {
+    componentWillMount(){
+        this.props.fetchPosts();
+    }
+
+    render(){
+        return (
+            <div> 
+                <div className="text-xs-right">
+                 <Link to="/posts/new" className="btn btn-primary">
+                    Add a Post
+                 </Link>
+                </div>
+                List of blog posts 
+            </div>
+        );
+    }
 }
+
+//import {bindActionCreators} from 'redux';
+// function mapDispatchToProps(dispatch){
+//     return bindActionCreators({fetchPosts},dispatch);
+// }== {fetchPosts} == {fethposts=fetchposts}
+
+export default connect(null,{fetchPosts})(PostsIndex);
